@@ -2,12 +2,13 @@ import { Pressable, StyleSheet } from "react-native";
 
 type Props = {
     children : React.ReactNode;
+    style?: object;
     onPress? : () => void;
 }
 
-export const ButtonCart = ({children, onPress}: Props) => {
+export const ButtonCart = ({children, style: style, onPress}: Props) => {
     return(
-        <Pressable style={styles.buttonCart} onPress={onPress}>{children}</Pressable>
+        <Pressable style={[styles.buttonCart, style]} onPress={onPress}>{children}</Pressable>
     );
 }
 

@@ -16,9 +16,12 @@ export const MainLayout = ({children}: LayoutProps) => {
 }
 const styles = StyleSheet.create({
     pageLayout: {
+        flex: 1,
         backgroundColor: '#E0E0E0', 
+        position: 'relative'
     },
     mainLayout: {
+        flex: 1,
         paddingHorizontal: 16,
         marginTop: 12,
     }

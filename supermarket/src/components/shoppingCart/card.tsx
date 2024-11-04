@@ -6,9 +6,16 @@ import { ButtonCart } from "./button";
 
 type Props = {
     product : Product;
+    quantity: number;
+    onDecrease: () => void;
+    onIncrease: () => void;
+    onRemove: () => void;
+}
+type PriceProps = {
+    children : React.ReactNode;
 }
 
-export const CartProduct = ({product}: Props) => {
+export const CartProduct = ({product, quantity, onDecrease, onIncrease, onRemove}: Props) => {
     //criar rota para detalhar o produto
     return(
         <TouchableOpacity>
@@ -16,15 +23,31 @@ export const CartProduct = ({product}: Props) => {
                 <ImageCard source={{ uri : product.image }}/>
                 <View style={styles.columnView}>
                     <H2>{product.name}</H2>
-                    <H3>Por R$: {product.price.toFixed(2)}</H3>
+                    <H3>Unidade: {product.price.toFixed(2)}</H3>
                     <View style={styles.rowViewButton}>
-                        <ButtonCart><TextButton>-</TextButton></ButtonCart>
-                        <ButtonCart><TextButton>1</TextButton></ButtonCart>
-                        <ButtonCart><TextButton>+</TextButton></ButtonCart>
+                        <ButtonCart onPress={onDecrease}>
+                            <TextButton textStyle={{color: "#ED1105"}}>-</TextButton>
+                        </ButtonCart>
+                        <ButtonCart style={{backgroundColor: '#F9F9F9'}}>
+                            <TextButton textStyle={{color: 'gray', fontSize: 22}}>{quantity}</TextButton>
+                        </ButtonCart>
+                        <ButtonCart onPress={onIncrease}>
+                            <TextButton textStyle={{color: "#ED1105"}}>+</TextButton>
+                        </ButtonCart>
+                        <ButtonCart onPress={onRemove} style={{width : 90, backgroundColor: 'red'}}>
+                            <TextButton textStyle={{color: 'white'}}>Excluir</TextButton>
+                        </ButtonCart>
                     </View>
                 </View>
             </View>
         </TouchableOpacity>
+    );
+}
+export const PriceTotal = ({children} : PriceProps) => {
+    return(
+        <View style={styles.priceTotal}>
+            <H2>{children}</H2>
+        </View>
     );
 }
 
@@ -43,6 +66,15 @@ const styles = StyleSheet.create({
     columnView: {
         flexDirection: 'column',
         marginLeft: 8
+    },
+    priceTotal: {
+        backgroundColor: '#F0F8FF',
+        padding: 16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'static',
+        bottom: 0,
+        elevation: 5,
     }
     
 });
