@@ -3,6 +3,7 @@ import { Product } from "../../types/product"
 import { H2, H3, TextButton } from "../textComponents";
 import { ImageCard } from "../imageComponentes";
 import { ButtonCart } from "./button";
+import { router } from "expo-router";
 
 type Props = {
     product : Product;
@@ -16,9 +17,16 @@ type PriceProps = {
 }
 
 export const CartProduct = ({product, quantity, onDecrease, onIncrease, onRemove}: Props) => {
-    //criar rota para detalhar o produto
+    const HandleTouchCard = () => {
+        if(product.id){
+            router.push({
+                pathname: `/product/${product.id}`,
+                params: { product: JSON.stringify(product)}
+            });
+        }
+    }
     return(
-        <TouchableOpacity>
+        <TouchableOpacity onPress={HandleTouchCard}>
             <View style={styles.rowView}>
                 <ImageCard source={{ uri : product.image }}/>
                 <View style={styles.columnView}>
@@ -68,13 +76,16 @@ const styles = StyleSheet.create({
         marginLeft: 8
     },
     priceTotal: {
-        backgroundColor: '#F0F8FF',
+        backgroundColor: 'white',
         padding: 16,
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'static',
+        marginTop: 10,
+        position: 'absolute',
         bottom: 0,
-        elevation: 5,
+        right: 0,
+        left: 0,
+        elevation: 10,
     }
     
 });

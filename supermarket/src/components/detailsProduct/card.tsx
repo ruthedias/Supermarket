@@ -1,12 +1,21 @@
 import { Product } from "../../types/product";
-import { Image, Pressable, StyleSheet, View } from "react-native";
+import { Alert, Image, Pressable, StyleSheet, View } from "react-native";
 import { H1, H2, H3, TextButton } from "../textComponents";
+import { CartStore } from "../../store/cartStore";
 
 type Props = {
     product : Product;
 }
 
 export const CardDetails = ({product}: Props) => {
+    const cartStore = CartStore();
+
+    const handleAddToCart = () => {
+        cartStore.addItem(product);
+        Alert.alert("Produto adicionado ao Carrinho", `${product.name}`, [
+            {text: "OK"}
+        ])
+    }
     return(
         <View style={styles.container}>
             <Image style={styles.imageDetails} 
@@ -21,7 +30,7 @@ export const CardDetails = ({product}: Props) => {
                 <H3>{product.description}</H3>
             </View>
             <View style={styles.containerCenter}>
-                <Pressable style={styles.buttonToCart}>
+                <Pressable style={styles.buttonToCart} onPress={handleAddToCart}>
                     <TextButton textStyle={{color: '#CD1105'}}>Adicionar ao Carrinho</TextButton>
                 </Pressable>
             </View>

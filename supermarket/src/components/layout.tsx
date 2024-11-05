@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     pageLayout: {
         flex: 1,
         backgroundColor: '#E0E0E0', 
-        position: 'relative'
     },
     mainLayout: {
         flex: 1,

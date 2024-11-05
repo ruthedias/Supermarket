@@ -1,8 +1,11 @@
-import { Tabs } from "expo-router";
+import { router, Tabs } from "expo-router";
 import { Pressable } from "react-native";
 import { FontAwesome } from '@expo/vector-icons';
 
 export default function TabsLayout(){
+    const HandleClick = () => {
+        router.navigate('/shoppingCart');
+    }
     return(
         <Tabs screenOptions={{
             headerStyle : { backgroundColor: "#FFCD00"},
@@ -15,7 +18,7 @@ export default function TabsLayout(){
             tabBarInactiveTintColor: "white",
             tabBarStyle: {backgroundColor: '#ED1105'},
             headerRight : () => 
-                <Pressable>
+                <Pressable style={{marginRight: 16}} onPress={HandleClick}>
                     <FontAwesome name="shopping-cart" size={24} color="#ED1105"/>
                 </Pressable>
         }}>

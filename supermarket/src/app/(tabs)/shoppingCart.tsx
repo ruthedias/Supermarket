@@ -3,8 +3,7 @@ import { MainLayout, PageLayout } from "../../components/layout";
 import { CartProduct, PriceTotal } from "../../components/shoppingCart/card";
 import { CartStore } from "../../store/cartStore";
 import { Product } from "../../types/product";
-import { H2 } from "../../components/textComponents";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 
 const CartScreen = observer(() => {
     
@@ -24,8 +23,10 @@ const CartScreen = observer(() => {
     const total = cartStore.getTotal();
     
     return(
+        <View style={{flex: 1, position: 'relative'}}>
         <PageLayout>
             <MainLayout>
+            <View style={{marginBottom: 80}}>
                 {cartStore.cartItems.map((item) => (
                     <CartProduct 
                         key={item.product.id}
@@ -36,9 +37,11 @@ const CartScreen = observer(() => {
                         onRemove={() => handleRemove(item.product)}
                         />
                 ))} 
+                </View>
             </MainLayout>
-            <PriceTotal>Total do Carrinho: R${total.toFixed(2)}</PriceTotal>
         </PageLayout>
+            <PriceTotal>Total do Carrinho: R${total.toFixed(2)}</PriceTotal>
+        </View>
     );
 })
 
