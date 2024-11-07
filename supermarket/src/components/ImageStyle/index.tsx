@@ -10,7 +10,6 @@ export const Banner = ({source}: ImageProps) => {
         <Image source={source} style={styles.imageBanner}/>
     );
 }
-
 export const ImageCard = ({source}: ImageProps) => {
     return(
         <Image source={source} style={styles.imageCard}/>
